@@ -1,5 +1,19 @@
 # Nombre de la imagen
-IMAGE_NAME=faster-whisper
+IMAGE_NAME=realtimes2t
+
+
+#Linea temporal, como mi carpeta local esta en una maquina windows tengo que usar una ruta validad en windows
+ifeq ($(OS), Linux)
+    AUDIO_VOLUME := $(shell pwd)/audiofiles
+    CHUNKS_VOLUME := $(shell pwd)/audiochunks
+    LOGS_VOLUME := $(shell pwd)/audiologs
+else
+    AUDIO_VOLUME := $(shell pwd | sed 's|^/c|C:|' | sed 's|/|\\|g')/audiofiles
+    CHUNKS_VOLUME := $(shell pwd | sed 's|^/c|C:|' | sed 's|/|\\|g')/audiochunks
+    LOGS_VOLUME := $(shell pwd | sed 's|^/c|C:|' | sed 's|/|\\|g')/audiologs
+endif
+
+
 
 # Construir la imagen
 build:
@@ -7,8 +21,12 @@ build:
 
 # Correr un contenedor interactivo
 run:
-	docker run --rm -it $(IMAGE_NAME)
+	 docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) python test.py ../audiofiles_volume/audio.m4a
+
+run-bash:
+	docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume   $(IMAGE_NAME) bash
 
 # Limpiar imágenes y contenedores
 clean:
 	docker system prune -f
+

@@ -6,17 +6,18 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalamos las librerías necesarias
-RUN pip install faster-whisper
+# Copiamos requirements en contenedor e instalamos las librerías necesarias
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# Copiar la carpeta de audio desde la carpeta local /app/audio al contenedor /app/audio
-COPY app/audio /app/audio
+# Copiar la carpeta local audiofiles en el contenedor /audiofiles. Esta carpeta contiene los audios a transcribir
+#COPY audiofiles /audiofiles
 
-# Copiar el script Python desde la carpeta local /app al contenedor /app
-COPY app/transcribe.py /app/transcribe.py
+# Copiar la carpeta local src en el contenedor /src
+COPY src /src
 
 # Establecer el directorio de trabajo
-WORKDIR /app
+WORKDIR /src
 
 # Comando por defecto para ejecutar el script Python
 CMD ["python", "transcribe.py"]
