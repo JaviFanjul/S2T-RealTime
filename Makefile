@@ -23,8 +23,9 @@ build:
 run:
 	 docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) python test.py ../audiofiles_volume/audio.m4a
 
+#Puede usarse para pruebas permite acceder al contendio del docker con la consola bash
 run-bash:
-	docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume   $(IMAGE_NAME) bash
+	docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) bash
 
 # Limpiar imágenes y contenedores
 clean:
