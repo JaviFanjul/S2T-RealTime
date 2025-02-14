@@ -2,7 +2,7 @@
 IMAGE_NAME=realtimes2t
 
 
-#Linea temporal, como mi carpeta local esta en una maquina windows tengo que usar una ruta validad en windows
+#Se usa por si se utiliza docker desde powershell. Es un transcriptor de rutas.
 ifeq ($(OS), Linux)
     AUDIO_VOLUME := $(shell pwd)/audiofiles
     CHUNKS_VOLUME := $(shell pwd)/audiochunks
