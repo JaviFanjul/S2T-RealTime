@@ -4,11 +4,11 @@ import logging
 from utils.split_audio import split_audio
 
 # Configuración del registro (logging)
-# Creamos un logger para la transcripción de los fragmentos
+# Logger que se usare para la transcripcuion de los fragmentos
 transcription_logger = logging.getLogger('transcription')
 transcription_logger.setLevel(logging.INFO)
 
-# Desactivar la propagación a los handlers globales
+# Desactivar la propagación a los handlers globales (Evito que se muestre dos veces por consola el loggind de la transcripcion)
 transcription_logger.propagate = False
 
 
@@ -23,9 +23,6 @@ transcription_console_handler.setFormatter(logging.Formatter('%(asctime)s - %(le
 # Añadir ambos handlers al logger
 transcription_logger.addHandler(transcription_file_handler)
 transcription_logger.addHandler(transcription_console_handler)
-
-
-# Configuración básica de logging para consola (también puedes imprimir información general)
 
 
 def transcribe_audio(input_audio, output_folder):

@@ -8,7 +8,7 @@ from utils.transcribe import transcribe_audio
 # Hilo 1: División de audio
 split_thread = threading.Thread(target=split_audio, args=(audio_path))
 
-# Hilo 2: Monitorización y transcripción
+# Hilo 2: Transcripción de audio
 monitor_thread = threading.Thread(target=transcribe_audio, args=(audio_path,output_folder,))
 
 split_thread.start()
