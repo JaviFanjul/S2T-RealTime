@@ -27,7 +27,7 @@ run:
 run-bash:
 	docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) bash
 
-# Limpiar imágenes y contenedores
+# Limpiar imágenes y contenedore
 clean:
 	docker system prune -f
 
