@@ -42,8 +42,14 @@ def transcribe_audio(input_audio, output_folder):
         # Cargar el modelo
         model = WhisperModel("medium", device="cpu")  # Cambiar a "cuda" si usas GPU
 
+        #A pesar de que en la maquina local se muestren por orden, en el volumen dentro del docker pueden
+        #desordenarse. Con esto me aseguro de que los chunks esten ordenados de cara a la transcripcion.  
+        chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
+                key=lambda x: int(x.split('_')[1].split('.')[0]))
+
+
         # Transcribir cada fragmento
-        for chunk_file in os.listdir(output_folder):
+        for chunk_file in chunks:
             if chunk_file.endswith(".wav"):
                 chunk_path = os.path.join(output_folder, chunk_file)
                 logging.info(f"Transcribiendo {chunk_path}...")

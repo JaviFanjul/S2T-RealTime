@@ -1,10 +1,17 @@
 import logging
 from pydub import AudioSegment
+import shutil
 
-# Configuración básica del logging
+# Configuración básica del logging (solo muestro por consola)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
+
 def split_audio(input_path, output_folder, chunk_length_ms=5000):
+    
+    #Borra contenido del volumen de chunks en caso de que haya restos de otra conversion.
+    shutil.rmtree(output_folder, ignore_errors=True)
+
     """Divide un audio en fragmentos de chunk_length_ms milisegundos"""
     try:
         # Intentar cargar el archivo de audio

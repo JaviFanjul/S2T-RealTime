@@ -21,7 +21,7 @@ build:
 
 # Correr un contenedor interactivo
 run:
-	 docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) python test.py ../audiofiles_volume/audio.m4a
+	 docker run --rm -it -v $(AUDIO_VOLUME):/audiofiles_volume -v $(CHUNKS_VOLUME):/audiochunks_volume -v $(LOGS_VOLUME):/audiologs_volume  $(IMAGE_NAME) python test.py ../audiofiles_volume/diegogallu.mp3
 
 #Puede usarse para pruebas permite acceder al contendio del docker con la consola bash
 run-bash:
