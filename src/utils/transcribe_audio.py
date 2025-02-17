@@ -1,7 +1,7 @@
 from faster_whisper import WhisperModel
 import os
 import logging
-from utils.split_audio import split_audio
+
 
 # Configuración del registro (logging)
 # Logger que se usare para la transcripcuion de los fragmentos
