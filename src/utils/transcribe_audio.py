@@ -25,19 +25,8 @@ transcription_logger.addHandler(transcription_file_handler)
 transcription_logger.addHandler(transcription_console_handler)
 
 
-def transcribe_audio(input_audio, output_folder):
+def transcribe_audio(output_folder):
     try:
-        # Verificar que el archivo existe
-        if not os.path.isfile(input_audio):
-            raise FileNotFoundError(f"El archivo '{input_audio}' no existe.")
-        
-        # Verificar extensión del archivo
-        EXTENSIONES_VALIDAS = {".mp3", ".wav", ".m4a", ".flac", ".ogg"}
-        if not any(input_audio.lower().endswith(ext) for ext in EXTENSIONES_VALIDAS):
-            raise ValueError("El archivo debe ser un formato de audio válido (mp3, wav, m4a, flac, ogg).")
-        
-        # Directorio para los fragmentos
-        split_audio(input_audio, output_folder)
         
         # Cargar el modelo
         model = WhisperModel("medium", device="cpu")  # Cambiar a "cuda" si usas GPU

@@ -12,7 +12,6 @@ def split_audio(input_path, output_folder, chunk_length_ms=5000):
     #Borra contenido del volumen de chunks en caso de que haya restos de otra conversion.
     shutil.rmtree(output_folder, ignore_errors=True)
 
-    """Divide un audio en fragmentos de chunk_length_ms milisegundos"""
     try:
         # Intentar cargar el archivo de audio
         logging.info(f"Iniciando la división del archivo de audio: {input_path}")
