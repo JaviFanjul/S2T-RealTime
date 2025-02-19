@@ -1,10 +1,6 @@
-
-import sys
 from utils.split_audio import split_audio
 from utils.transcribe_audio import transcribe_audio
+from utils.config import audiopath, chunkpath
 
-audio_path = sys.argv[1]
-output_folder = "../audiochunks_volume"
-
-split_audio(audio_path , output_folder)
-transcribe_audio(output_folder)
+split_audio(audiopath , chunkpath)
+transcribe_audio(chunkpath)
