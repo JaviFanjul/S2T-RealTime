@@ -15,6 +15,3 @@ COPY src /src
 
 # Establecer el directorio de trabajo
 WORKDIR /src
-
-# Comando por defecto para ejecutar el script Python
-CMD ["python", "transcribe.py"]
