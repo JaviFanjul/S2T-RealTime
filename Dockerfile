@@ -10,9 +10,6 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copiar la carpeta local audiofiles en el contenedor /audiofiles. Esta carpeta contiene los audios a transcribir
-#COPY audiofiles /audiofiles
-
 # Copiar la carpeta local src en el contenedor /src
 COPY src /src
 
