@@ -4,8 +4,7 @@ import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
 from utils.config import prompt_inicial
-from utils.context import trim_context
-from utils.config import max_tokens
+
 
 # Configuración del registro (logging)
 # Logger que se usare para la transcripcuion de los fragmentos
@@ -54,12 +53,9 @@ def transcribe_audio(output_folder):
                 chunk_path = os.path.join(output_folder, chunk_file)
 
                 #Se carga contexto apoyandose en transcripciones de chunks anteriores y se trime en caso de superar numero de tokens
-                full_context = load_previous_transcriptions(logpath, prompt_inicial)
-                trimed_context = trim_context(full_context , max_tokens)
-                print(trimed_context)
-
+                context = load_previous_transcriptions(logpath, prompt_inicial)
                 logging.info(f"Transcribiendo {chunk_path}...")
-                segments, _ = model.transcribe(chunk_path ,initial_prompt = trimed_context,  **options)
+                segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
                 
                 # Registrar la transcripción en el archivo de log y consola
                 for segment in segments:

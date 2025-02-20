@@ -1,12 +1,12 @@
 import re
 import tiktoken
-
+from utils.config import max_tokens
 def load_previous_transcriptions(log_file , prompt_inicial):
     
     try:
         with open(log_file, "r", encoding="utf-8") as f:
             log_content =  f.read().strip()
-            return f"{prompt_inicial} {clean_transcription(log_content)}"
+            return trim_context(f"{prompt_inicial} {clean_transcription(log_content)}", max_tokens)
     except FileNotFoundError:
         return ""  # Si el archivo no existe, empezamos sin contexto
     
