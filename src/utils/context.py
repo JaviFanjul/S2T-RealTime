@@ -1,6 +1,4 @@
 import re
-
-
 def load_previous_transcriptions(log_file , prompt_inicial):
     
     try:
