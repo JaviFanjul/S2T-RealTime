@@ -4,6 +4,7 @@ import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
 from utils.config import prompt_inicial
+from utils.config import whisper_model
 
 
 # Configuración del registro (logging)
@@ -16,7 +17,7 @@ transcription_logger.propagate = False
 
 
 # Handler para escribir los logs en un archivo
-transcription_file_handler = logging.FileHandler("../audiologs_volume/audio_transcription.log", mode='a')
+transcription_file_handler = logging.FileHandler(logpath, mode='a')
 transcription_file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 
 # Handler para imprimir los logs en consola
@@ -35,7 +36,7 @@ def transcribe_audio(output_folder):
         open(logpath, "w", encoding="utf-8").close()  # Borra el contenido del log
 
         # Cargar el modelo
-        model = WhisperModel("small", device = "cpu", compute_type = "float32")  # Cambiar a "cuda" si usas GPU
+        model = WhisperModel(whisper_model , device = "cpu", compute_type = "float32")  # Cambiar a "cuda" si usas GPU
         options = {
             "task": "transcribe",
             "language": "es"  
@@ -52,7 +53,7 @@ def transcribe_audio(output_folder):
             if chunk_file.endswith(".wav"):
                 chunk_path = os.path.join(output_folder, chunk_file)
 
-                #Se carga contexto apoyandose en transcripciones de chunks anteriores y se trime en caso de superar numero de tokens
+                #Se carga contexto apoyandose en transcripciones de chunks anteriores
                 context = load_previous_transcriptions(logpath, prompt_inicial)
                 logging.info(f"Transcribiendo {chunk_path}...")
                 segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
