@@ -1,9 +1,9 @@
 from faster_whisper import WhisperModel
+from transformers import WhisperTokenizer
 import os
 import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
-from utils.config import prompt_inicial
 from utils.config import whisper_model
 
 
@@ -41,9 +41,10 @@ def transcribe_audio(output_folder):
             "task": "transcribe",
             "language": "es"  
         }
-
+        tokenizer = WhisperTokenizer.from_pretrained(f"openai/whisper-{whisper_model}")
         #A pesar de que en la maquina local se muestren por orden, en el volumen dentro del docker pueden
         #desordenarse. Con esto me aseguro de que los chunks esten ordenados de cara a la transcripcion.  
+
         chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
                 key=lambda x: int(x.split('_')[1].split('.')[0]))
 
@@ -54,7 +55,7 @@ def transcribe_audio(output_folder):
                 chunk_path = os.path.join(output_folder, chunk_file)
 
                 #Se carga contexto apoyandose en transcripciones de chunks anteriores
-                context = load_previous_transcriptions(logpath, prompt_inicial)
+                context = load_previous_transcriptions(logpath, tokenizer)
                 logging.info(f"Transcribiendo {chunk_path}...")
                 segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
                 
@@ -68,4 +69,3 @@ def transcribe_audio(output_folder):
         logging.error(f"Error: {e}")
     except Exception as e:
         logging.error(f"Error inesperado: {e}")
-
