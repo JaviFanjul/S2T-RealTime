@@ -1,6 +1,5 @@
 import re
-from utils.config import whisper_model
-from transformers import WhisperTokenizer
+
 
 def load_previous_transcriptions(log_file,tokenizer):
     
@@ -22,17 +21,15 @@ def clean_transcription(log_content,tokenizer):
         if clean_text.strip():  # Evitar líneas vacías
             cleaned_lines.append(clean_text)
 
-    transcripcion =  " ".join(cleaned_lines)  # Unir todo en un solo string limpio
-    tokens = tokenizer.encode(transcripcion)
+    context =  " ".join(cleaned_lines)  # Unir todo en un solo string limpio
+    tokens = tokenizer.encode(context)
     
     if(len(tokens) > max_tokens):
         tokens_recortados = tokens[-max_tokens:]
-        transcripcion = tokenizer.decode(tokens_recortados).replace("<|endoftext|>", "")
-        print(transcripcion)
-        return transcripcion
+        context = tokenizer.decode(tokens_recortados).replace("<|endoftext|>", "")
+        return context
     else:
-        print(transcripcion)
-        return transcripcion
+        return context
     
 
 

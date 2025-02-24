@@ -1,10 +1,9 @@
-from faster_whisper import WhisperModel
-from transformers import WhisperTokenizer
+
 import os
 import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
-from utils.config import whisper_model
+from utils.model import load_model
 
 
 # Configuración del registro (logging)
@@ -36,14 +35,7 @@ def transcribe_audio(output_folder):
         open(logpath, "w", encoding="utf-8").close()  # Borra el contenido del log
 
         # Cargar el modelo
-        model = WhisperModel(whisper_model , device = "cpu", compute_type = "float32")  # Cambiar a "cuda" si usas GPU
-        options = {
-            "task": "transcribe",
-            "language": "es"  
-        }
-        tokenizer = WhisperTokenizer.from_pretrained(f"openai/whisper-{whisper_model}")
-        #A pesar de que en la maquina local se muestren por orden, en el volumen dentro del docker pueden
-        #desordenarse. Con esto me aseguro de que los chunks esten ordenados de cara a la transcripcion.  
+        model,options,tokenizer = load_model()
 
         chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
                 key=lambda x: int(x.split('_')[1].split('.')[0]))
