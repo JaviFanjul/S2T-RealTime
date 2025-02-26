@@ -30,13 +30,15 @@ transcription_logger.addHandler(transcription_console_handler)
 
 def transcribe_audio(output_folder):
     try:
+        #Funcion que transcribe chunks de audio y guarda las transcripciones en un archivo de log.
 
         #Borrar restos del log de transcripcion anterior
         open(logpath, "w", encoding="utf-8").close()  # Borra el contenido del log
 
-        # Cargar el modelo
+        # Cargar el modelo, opciones y tokenizador
         model,options,tokenizer = load_model()
 
+        #Ordenada los chunks de audio para procesarlos en orden
         chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
                 key=lambda x: int(x.split('_')[1].split('.')[0]))
 
