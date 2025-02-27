@@ -21,8 +21,8 @@ def split_audio(buffer, output_folder):
     #Divido audio en chunks en funcion del silencio
     chunks = split_on_silence(
         audio,
-        min_silence_len,  # en milisegundos
-        silence_thresh  # en dB
+        min_silence_len=min_silence_len,  # en milisegundos
+        silence_thresh=silence_thresh  # en dB
     )
    #Bucle que divide el audio en fragmentos de duracion especificada y los exporta en formato wav.
     i=0
