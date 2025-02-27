@@ -10,3 +10,9 @@ logpath  ="../audiotranscription_volume/audio_transcription.log"
 chunk_length_ms = 5000  
 #Indica el modelo de faster-whisper a utilizar
 whisper_model = "medium"
+#Opciones para el filtrado del audio
+noise_duration = 0.5  # Duración del audio de ruido en segundos
+cutoff_freq = 300   # Frecuencia de corte del filtro pasaaltos
+#Opciones para la deteccion de silencios en el divisor de audio
+min_silence_len=500
+silence_thresh=-40
