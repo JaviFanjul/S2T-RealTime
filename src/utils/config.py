@@ -13,6 +13,9 @@ whisper_model = "medium"
 #Opciones para el filtrado del audio
 noise_duration = 0.5  # Duración del audio de ruido en segundos
 cutoff_freq = 300   # Frecuencia de corte del filtro pasaaltos
+pop_decrease = 0.8  # Factor de reducción de ruido
+filter_type = "high"  # Tipo de filtro a aplicar
+order = 5  # Orden del filtro
 #Opciones para la deteccion de silencios en el divisor de audio
 min_silence_len=500
 silence_thresh=-40

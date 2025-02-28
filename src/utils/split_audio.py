@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 def split_audio(buffer, output_folder):
     #Funcion que divide un archivo de audio en fragmentos de duracion especificada y los exporta en formato wav.
-
+    logging.info("Dividiendo audio en fragmentos ...")
     #Borra contenido del volumen de chunks en caso de que haya restos de otra conversion.
     shutil.rmtree(output_folder, ignore_errors=True)
     #Cargo audio en formato wav
