@@ -17,5 +17,5 @@ pop_decrease = 0.8  # Factor de reducción de ruido
 filter_type = "high"  # Tipo de filtro a aplicar
 order = 5  # Orden del filtro
 #Opciones para la deteccion de silencios en el divisor de audio
-min_silence_len=500
-silence_thresh=-40
+min_silence_len=750 # Duración mínima de un silencio en ms
+silence_thresh=-40 # Umbral de silencio en dB
