@@ -1,3 +1,5 @@
 
 audiochunks/*
+!audiochunks/.gitkeep
 audiofiles/*
+!audiofiles/.gitkeep
