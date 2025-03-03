@@ -12,5 +12,8 @@ logpath  ="../audiotranscription_volume/audio_transcription.log"
 #Indica cuanta duracion en ms tendra cada chunk de audio
 chunk_length_ms = 5000  
 
+#Indica duracion del overlap en ms
+overlap = 1000
+
 #Indica el modelo de faster-whisper a utilizar
 whisper_model = "medium"

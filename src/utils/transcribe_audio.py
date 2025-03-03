@@ -42,7 +42,6 @@ def transcribe_audio(output_folder):
         chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
                 key=lambda x: int(x.split('_')[1].split('.')[0]))
 
-
         # Transcribir cada fragmento
         for chunk_file in chunks:
             if chunk_file.endswith(".wav"):
