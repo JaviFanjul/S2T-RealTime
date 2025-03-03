@@ -6,6 +6,7 @@ from pydub import AudioSegment
 #Informacion de configuracion
 from utils.config import chunk_length_ms
 from utils.config import overlap
+from utils.remove_chunks import borrar_contenido_excepto_gitkeep
 
 # Configuración básica del logging (solo muestro por consola)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -16,7 +17,7 @@ def split_audio(audiopath, output_folder):
     logging.info("Dividiendo audio en fragmentos ...")
 
     #Borra contenido del volumen de chunks en caso de que haya restos de otra conversion.
-    shutil.rmtree(output_folder, ignore_errors=True)
+    borrar_contenido_excepto_gitkeep(output_folder)
 
     #Cargo audio en formato wav
     audio = AudioSegment.from_file(audiopath)

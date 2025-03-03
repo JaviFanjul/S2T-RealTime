@@ -10,7 +10,7 @@ chunkpath = "../audiochunks_volume"
 logpath  ="../audiotranscription_volume/audio_transcription.log"
 
 #Indica cuanta duracion en ms tendra cada chunk de audio
-chunk_length_ms = 10000  
+chunk_length_ms = 20000  
 
 #Indica duracion del overlap en ms
 overlap = 2000
