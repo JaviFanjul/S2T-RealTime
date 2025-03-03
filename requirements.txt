@@ -3,9 +3,6 @@ torch==2.1.2
 torchaudio==2.1.2
 pydub==0.25.1
 transformers==4.28.0
-librosa==0.10.0
-noisereduce==2.0.1
-scipy==1.10.0
 pydub==0.25.1
-soundfile==0.12.1
+librosa
 

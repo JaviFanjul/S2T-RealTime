@@ -32,7 +32,7 @@ def clean_transcription(log_content,tokenizer):
 
         for line in lines:
             # Bucle donde se eliminan los prefijos de los logs y se almacena solo el texto
-            clean_text = re.sub(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+ - INFO - \[\d+\.\d+s -> \d+\.\d+s\] ", "", line)
+            clean_text = re.sub(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+ - INFO -\s*", "", line)
             if clean_text.strip():  # Evitar líneas vacías
                 cleaned_lines.append(clean_text)
 
