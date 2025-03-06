@@ -41,10 +41,10 @@ def clean_transcription(log_content,tokenizer):
         tokens = tokenizer.encode(context)
         
         #Se controla que el tamaño del contexto no exceda el tamaño maximo permitido por el modelo
-        if(len(tokens) > max_tokens):
+        if(len(tokens) > (max_tokens - 100)):
 
             #Si el tamaño es superior al maximo permitido, se recorta el contexto
-            tokens_recortados = tokens[-max_tokens:]
+            tokens_recortados = tokens[-(max_tokens - 100):]
             
             #Se elimina etiqueta de fin de texto y se devuelve el contexto recortado
             context = tokenizer.decode(tokens_recortados).replace("<|endoftext|>", "")

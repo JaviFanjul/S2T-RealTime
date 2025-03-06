@@ -1,5 +1,5 @@
 import os
-import shutil
+
 
 def borrar_contenido_excepto_gitkeep(output_folder):
     # Funcion que borra los chunks de transcripciones anteriores, excepto el archivo '.gitkeep'

@@ -10,12 +10,9 @@ chunkpath = "../audiochunks_volume"
 logpath  ="../audiotranscription_volume/audio_transcription.log"
 
 #Indica cuanta duracion en ms tendra cada chunk de audio
-chunk_length_ms = 5000 
-
-#Indica duracion del overlap en ms
-overlap = 1000
+chunk_length_ms = 10000 
 
 #Indica el modelo de faster-whisper a utilizar
 whisper_model = "medium"
 
-umbral_energia = 500
+threshold = 0.9

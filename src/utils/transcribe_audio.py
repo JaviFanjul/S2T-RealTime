@@ -4,6 +4,7 @@ import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
 from utils.model import load_model
+from utils.config import threshold
 
 
 # Configuración del registro (logging)
@@ -47,7 +48,7 @@ def transcribe_audio(output_folder):
                 chunk_path = os.path.join(output_folder, chunk)
                 #Se carga contexto apoyandose en transcripciones de chunks anteriores
                 context = load_previous_transcriptions(logpath, tokenizer)
-                segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
+                segments, _ = model.transcribe(chunk_path ,initial_prompt = context, vad_filter = True, vad_parameters={"threshold": threshold} ,**options)
                 for segment in segments:
                     transcription_logger.info(segment.text)
     

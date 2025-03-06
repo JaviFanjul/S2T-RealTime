@@ -1,11 +1,9 @@
 import logging
-import shutil
 import os
 from pydub import AudioSegment
 
 #Informacion de configuracion
 from utils.config import chunk_length_ms
-from utils.config import overlap
 from utils.remove_chunks import borrar_contenido_excepto_gitkeep
 
 # Configuración básica del logging (solo muestro por consola)
