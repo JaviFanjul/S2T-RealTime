@@ -23,11 +23,11 @@ def split_audio(audiopath, output_folder):
     audio = AudioSegment.from_file(audiopath)
    #Bucle que divide el audio en fragmentos de duracion especificada y los exporta en formato wav.
     try:
-        for i, start in enumerate(range(0, len(audio), chunk_length_ms - overlap)):
+        for i, start in enumerate(range(0, len(audio), chunk_length_ms)):
             end = min(start + chunk_length_ms, len(audio))
             chunk = audio[start:end]
             chunk.export(os.path.join(output_folder, f"chunk_{i}.wav"), format="wav")
-            logging.info(f"Fragmento {i} exportado exitosamente con solapamiento de {overlap}ms.")
+            logging.info(f"Fragmento {i} exportado exitosamente.")
 
         logging.info("Audio dividido en fragmentos exitosamente.")
     except Exception as e:

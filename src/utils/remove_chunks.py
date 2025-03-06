@@ -2,14 +2,11 @@ import os
 import shutil
 
 def borrar_contenido_excepto_gitkeep(output_folder):
-    # Itera sobre todos los archivos y carpetas dentro del directorio
-    for root, dirs, files in os.walk(output_folder, topdown=False):
-        for name in files:
-            # Verifica si el archivo no es 'gitkeep'
-            if name != '.gitkeep':
-                os.remove(os.path.join(root, name))  # Borra el archivo
-        for name in dirs:
-            # Verifica si la carpeta no es '.gitkeep'
-            if name != '.gitkeep':
-                shutil.rmtree(os.path.join(root, name), ignore_errors=True)  # Borra la carpeta
+    # Funcion que borra los chunks de transcripciones anteriores, excepto el archivo '.gitkeep'
+    for name in os.listdir(output_folder):
+        #Bucle que recorre los archivos en la carpeta de chunks y los borra
+        file_path = os.path.join(output_folder, name)
 
+        #Comprueba si el archivo es un archivo y si no es el archivo '.gitkeep' lo borra
+        if os.path.isfile(file_path) and name != '.gitkeep':  
+            os.remove(file_path)

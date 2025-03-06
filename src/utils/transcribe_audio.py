@@ -4,8 +4,6 @@ import logging
 from utils.context import load_previous_transcriptions
 from utils.config import logpath
 from utils.model import load_model
-from utils.solapamiento_audio import eliminar_solapamiento
-from utils.voice_detection import is_voice
 
 
 # Configuración del registro (logging)
@@ -43,23 +41,15 @@ def transcribe_audio(output_folder):
         #Ordenada los chunks de audio para procesarlos en orden
         chunks = sorted([f for f in os.listdir(output_folder) if f.endswith('.wav')],
                 key=lambda x: int(x.split('_')[1].split('.')[0]))
-
-        prev_text = ""
         
         # Transcribir cada fragmento
-        for chunk_file in chunks:
-            if chunk_file.endswith(".wav"):
-                chunk_path = os.path.join(output_folder, chunk_file)
-                if(is_voice(chunk_path)):
-                    #Se carga contexto apoyandose en transcripciones de chunks anteriores
-                    context = load_previous_transcriptions(logpath, tokenizer)
-                    logging.info(f"Transcribiendo {chunk_path}...")
-                    segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
-                    text = " ".join(segment.text for segment in segments)
-                    #Elimino transcripcion repetida debido a solapamiento
-                    texto_sin_solapamiento = eliminar_solapamiento(prev_text,text)
-                    prev_text = text
-                    transcription_logger.info(texto_sin_solapamiento)
+        for chunk in chunks:
+                chunk_path = os.path.join(output_folder, chunk)
+                #Se carga contexto apoyandose en transcripciones de chunks anteriores
+                context = load_previous_transcriptions(logpath, tokenizer)
+                segments, _ = model.transcribe(chunk_path ,initial_prompt = context,  **options)
+                for segment in segments:
+                    transcription_logger.info(segment.text)
     
     except FileNotFoundError as e:
         logging.error(f"Error: {e}")
